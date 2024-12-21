@@ -31,37 +31,26 @@ RUN apt-get update && apt-get install -y \
 RUN pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu121
 
 
-WORKDIR /app
+WORKDIR /runpod-volume
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git
-RUN pip3 install -r /app/ComfyUI/requirements.txt
+RUN pip3 install -r /runpod-volume/ComfyUI/requirements.txt
 
 ## install custom nodes
-WORKDIR /app/ComfyUI/custom_nodes
-RUN git clone https://github.com/Acly/comfyui-tooling-nodes.git && pip3 install -r comfyui-tooling-nodes/requirements.txt
-RUN git clone https://github.com/cubiq/ComfyUI_IPAdapter_plus.git
-RUN git clone https://github.com/MariusKM/ComfyUI-BadmanNodes.git && pip3 install -r ComfyUI-BadmanNodes/requirements.txt
-RUN git clone https://github.com/kijai/ComfyUI-KJNodes.git && pip3 install -r ComfyUI-KJNodes/requirements.txt
-RUN git clone https://github.com/ltdrdata/ComfyUI-Impact-Pack.git
-RUN touch skip_download_model
-WORKDIR /app/ComfyUI/custom_nodes/ComfyUI-Impact-Pack
-RUN git clone https://github.com/ltdrdata/ComfyUI-Impact-Subpack impact_subpack 
-RUN pip3 install -r requirements.txt && python install.py
+WORKDIR /runpod-volume/ComfyUI/custom_nodes
+RUN git clone https://github.com/ltdrdata/ComfyUI-Manager.git
+
 
 
 # Change working directory to ComfyUI
-WORKDIR /app/ComfyUI
+WORKDIR /runpod-volume/ComfyUI
 # Install runpod
 RUN pip install runpod requests
-
-# Support for the network volume
-ADD src/extra_model_paths.yaml ./
 
 # Go back to the root
 WORKDIR /
 
-# Add scripts
-ADD src/start.sh src/rp_handler.py test_input.json ./
-RUN chmod +x /start.sh
+
 
 # Start container
-CMD ["/start.sh"]
+EXPOSE 8848
+CMD ["python3", "-u", "/runpod-volume/ComfyUI/main.py","--highvram","--disable-smart-memory", "--listen", "0.0.0.0", "--port", "8848"]

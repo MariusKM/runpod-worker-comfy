@@ -8,6 +8,9 @@ import os
 import requests
 import base64
 from io import BytesIO
+from typing import Optional
+import uuid
+
 
 # Time to wait between API check attempts in milliseconds
 COMFY_API_AVAILABLE_INTERVAL_MS = 50
@@ -284,7 +287,7 @@ def upload_image(
     Edited function to use the job_id as the key for the image.
     """
     image_name = str(uuid.uuid4())[:8]
-    boto_client, _ = get_boto_client()
+    boto_client, _ = rp_upload.get_boto_client()
     file_extension = os.path.splitext(image_location)[1]
     content_type = "image/" + file_extension.lstrip(".")
 
