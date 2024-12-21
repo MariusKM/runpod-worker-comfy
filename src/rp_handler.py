@@ -203,66 +203,42 @@ def base64_encode(img_path):
         return f"{encoded_string}"
 
 
+def parse_filename(filename):
+    """Parse the filename to extract components."""
+    # Remove .png extension and split by underscore
+    parts = filename.rsplit('.', 1)[0].split('_')
+    if len(parts) >= 5:
+        return {
+            'vase_type': parts[0],
+            'token': parts[1],
+            'color1': parts[2],
+            'color2': parts[3],
+            'seed': parts[4],
+            'complete_filename': filename
+        }
+    return None
+
 def process_output_images(outputs, job_id):
-    """
-    This function takes the "outputs" from image generation and the job ID,
-    then determines the correct way to return the image, either as a direct URL
-    to an AWS S3 bucket or as a base64 encoded string, depending on the
-    environment configuration.
-
-    Args:
-        outputs (dict): A dictionary containing the outputs from image generation,
-                        typically includes node IDs and their respective output data.
-        job_id (str): The unique identifier for the job.
-
-    Returns:
-        dict: A dictionary with the status ('success' or 'error') and the message,
-              which is either the URL to the image in the AWS S3 bucket or a base64
-              encoded string of the image. In case of error, the message details the issue.
-
-    The function works as follows:
-    - It first determines the output path for the images from an environment variable,
-      defaulting to "app/ComfyUI/output" if not set.
-    - It then iterates through the outputs to find the filenames of the generated images.
-    - After confirming the existence of the image in the output folder, it checks if the
-      AWS S3 bucket is configured via the BUCKET_ENDPOINT_URL environment variable.
-    - If AWS S3 is configured, it uploads the image to the bucket and returns the URL.
-    - If AWS S3 is not configured, it encodes the image in base64 and returns the string.
-    - If the image file does not exist in the output folder, it returns an error status
-      with a message indicating the missing image file.
-    """
-
-    # The path where ComfyUI stores the generated images
+    """Modified to pass filename information to upload_image"""
     COMFY_OUTPUT_PATH = os.environ.get("COMFY_OUTPUT_PATH", "app/ComfyUI/output")
-
-    output_images = {}
-
+    
     for node_id, node_output in outputs.items():
         if "images" in node_output:
             for image in node_output["images"]:
                 output_images = os.path.join(image["subfolder"], image["filename"])
+                filename_info = parse_filename(image["filename"])
 
     print(f"runpod-worker-comfy - image generation is done")
-
-    # expected image output folder
     local_image_path = f"{COMFY_OUTPUT_PATH}/{output_images}"
-
     print(f"runpod-worker-comfy - {local_image_path}")
 
-    # The image is in the output folder
     if os.path.exists(local_image_path):
         if os.environ.get("BUCKET_ENDPOINT_URL", False):
-            # URL to image in AWS S3
-            image = upload_image(job_id, local_image_path)
-            print(
-                "runpod-worker-comfy - the image was generated and uploaded to AWS S3"
-            )
+            image = upload_image(job_id, local_image_path, filename_info=filename_info)
+            print("runpod-worker-comfy - the image was generated and uploaded to AWS S3")
         else:
-            # base64 image
             image = base64_encode(local_image_path)
-            print(
-                "runpod-worker-comfy - the image was generated and converted to base64"
-            )
+            print("runpod-worker-comfy - the image was generated and converted to base64")
 
         return {
             "status": "success",
@@ -281,19 +257,11 @@ def upload_image(
     result_index=0,
     results_list=None,
     bucket_name: Optional[str] = None,
+    filename_info=None
 ):
-    """
-    Upload a single file to bucket storage.
-    Edited function to use the job_id as the key for the image.
-    """
-    image_name = str(uuid.uuid4())[:8]
+    """Modified to implement conditional folder structure"""
     boto_client, _ = rp_upload.get_boto_client()
-    file_extension = os.path.splitext(image_location)[1]
-    content_type = "image/" + file_extension.lstrip(".")
-
-    with open(image_location, "rb") as input_file:
-        output = input_file.read()
-
+    
     if boto_client is None:
         # Save the output to a file
         print("No bucket endpoint set, saving to disk folder 'simulated_uploaded'")
@@ -314,18 +282,40 @@ def upload_image(
         return sim_upload_location
 
     bucket = bucket_name if bucket_name else time.strftime("%m-%y")
-    s3_key = job_id.replace('sync-', '')
+    
+    # Determine the S3 key based on flags and filename info
+    if filename_info:
+        test_token = os.environ.get("TEST_TOKEN", "false").lower() == "true"
+        test_color = os.environ.get("TEST_COLOR", "false").lower() == "true"
+        
+        if test_token:
+            s3_key = f"{filename_info['vase_type']}/{filename_info['token']}/{filename_info['complete_filename']}"
+        elif test_color:
+            s3_key = f"{filename_info['vase_type']}/{filename_info['color1']}/{filename_info['color2']}/{filename_info['complete_filename']}"
+        else:
+            s3_key = filename_info['complete_filename']
+    else:
+        # Fallback to original behavior if filename parsing fails
+        s3_key = job_id.replace('sync-', '')
+        file_extension = os.path.splitext(image_location)[1]
+        s3_key = f"{s3_key}{file_extension}"
 
+    with open(image_location, "rb") as input_file:
+        output = input_file.read()
+
+    content_type = "image/" + os.path.splitext(image_location)[1].lstrip(".")
+    
     boto_client.put_object(
         Bucket=f"{bucket}",
-        Key=f"{s3_key}{file_extension}",
+        Key=s3_key,
         Body=output,
         ContentType=content_type,
     )
 
+    # Generate presigned URL using the same key structure
     presigned_url = boto_client.generate_presigned_url(
         "get_object",
-        Params={"Bucket": f"{bucket}", "Key": f"{job_id}/{image_name}{file_extension}"},
+        Params={"Bucket": f"{bucket}", "Key": s3_key},
         ExpiresIn=604800,
     )
 
