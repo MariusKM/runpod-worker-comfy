@@ -7,8 +7,18 @@ import io
 import time
 
 # Function to set parameters in the workflow JSON
-def set_params(workflow, colorDetail, colorBody, token):
+def set_params(workflow, colorDetail, colorBody, token, whatVase,isCreative,isLAB):
+    seed = random.randint(0, sys.maxsize)
     for node in workflow:
+        if node == '552':
+            workflow[node]['inputs']['value'] = whatVase
+            print("Set whatVase")
+        if node == '618':
+            workflow[node]['inputs']['value'] = isCreative
+            print("Set isCreative")
+        if node == '624':
+            workflow[node]['inputs']['value'] = isLAB
+            print("Set isLAB")
         if '_meta' in workflow[node]:
             if workflow[node]['_meta']['title'] == 'ColorInputDetails':
                 workflow[node]['inputs']['value'] = colorDetail
@@ -20,8 +30,11 @@ def set_params(workflow, colorDetail, colorBody, token):
                 workflow[node]['inputs']['value'] = token
                 print("Set PromptTokenInput")
             if workflow[node]['_meta']['title'] == 'GlobalSeed':
-                workflow[node]['inputs']['value'] = random.randint(0, sys.maxsize)
+                workflow[node]['inputs']['value'] = seed
                 print("Set GlobalSeed")
+            if workflow[node]['_meta']['title'] == 'GlobalSeedString':
+                workflow[node]['inputs']['value'] = str(seed)
+                print("Set GlobalSeedString")
     return workflow
 
 # Function to send a request to the Runpod API endpoint
@@ -55,7 +68,7 @@ def send_request(workflow, api_url, api_key,testWF):
         return None
 
 # Main script
-def main(input_json_path, api_url, api_key, colorDetail, colorBody, token, testWF):
+def main(input_json_path, api_url, api_key, colorDetail, colorBody, token,whatVase,isCreative,isLAB, testWF):
     # Load the input JSON file
     start = time.time()
     with open(input_json_path, "r") as f:
@@ -63,7 +76,7 @@ def main(input_json_path, api_url, api_key, colorDetail, colorBody, token, testW
 
     # Modify the workflow parameters
     if not testWF:
-        workflow = set_params(workflow, colorDetail, colorBody, token)
+        workflow = set_params(workflow, colorDetail, colorBody, token,whatVase,isCreative,isLAB)
 
     # Send the modified workflow to the Runpod API
     response = send_request(workflow, api_url, api_key, testWF)
@@ -90,17 +103,21 @@ if __name__ == "__main__":
     if testWF :
         input_json_path = "test_input.json"
     else:
-        input_json_path = "JasperAI_AWS_Endpoint_Optimized_Upres_API.json"  # Replace with your JSON file path
-    #input_json_path = "JasperAI_AWS_Endpoint_API.json"  # Replace with your JSON file path
+        #input_json_path = "JasperAI_Runpod_Final_Test_API.json"  # Replace with your JSON file path
+        input_json_path = "JasperAI_Runpod_Final_NewTransferTest_API.json"  # Replace with your JSON file path
+        #input_json_path = "JasperAI_Runpod_Final_ColorTest_New_API_V2.json"  # Replace with your JSON file path
     api_url = "https://api.runpod.ai/v2/ghpeoonf1l7yqb/runsync" # Replace with your Runpod API endpoint URL
     api_key = "rpa_5RPRABDS0X5QJYSFTVB34BKGYH3AHKJOUQLQJON613y2n1"  # Replace with your API key
 
     # Parameters to set
     colorDetail = "5005441"  # Replace with your desired value
     colorBody = "12227444"   # Replace with your desired value
-    token = "Bear"           # Replace with your desired value
+    token = "Fox"           # Replace with your desired value
+    whatVase =3
+    isCreative =1
+    isLAB =1
 
     # Run the main script
-    main(input_json_path, api_url, api_key, colorDetail, colorBody, token, testWF)
-    #curl -Headers @{ "Authorization" = "Bearer rpa_RUGGARJG8B04GNBGCN5WK10NUZYBCCT4TWS68HMO5id23n" } https://api.runpod.ai/v2/e6s4y2ri7yc5aw/health
+    main(input_json_path, api_url, api_key, colorDetail, colorBody, token, whatVase,isCreative,isLAB, testWF)
+  
 

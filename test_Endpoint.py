@@ -19,8 +19,8 @@ colors = [
     '16600577',   # VERMILION
     '5005441',    # SLATE_BLUE
     '8495811',    # STEEL_BLUE
-    '8504259',    # POWDER_BLUE
-    '15527128',   # OFF_WHITE
+    '8761788'     # POWDER_BLUE
+    '15526887'    # OFF_WHITE
     '7495776',    # DUSTY_ROSE
     '7827809',    # WARM_GRAY
     '14199131',   # GOLDEN_TAN
@@ -49,6 +49,9 @@ def set_params(workflow, colorDetail, colorBody, token, whatVase, isCreative, is
                 workflow[node]['inputs']['value'] = token
             if workflow[node]['_meta']['title'] == 'GlobalSeed':
                 workflow[node]['inputs']['value'] = random.randint(0, sys.maxsize)
+            if workflow[node]['_meta']['title'] == 'GlobalSeedString':
+                workflow[node]['inputs']['value'] = str(random.randint(0, sys.maxsize))
+                print("Set GlobalSeedString")
     return workflow
 
 def send_request(workflow, api_url, api_key, testWF):
@@ -88,7 +91,7 @@ def prepare_and_send_request(i, original_workflow, api_url, api_key, tokens, isL
 
     colorDetail = random.choice(colors)
     colorBody = random.choice(colors)
-    whatVase = random.randint(1, 4)      # Random integer 1-4
+    whatVase = 1    # Random integer 1-4
     isCreative = random.choice([1, 2])   # Random 1 or 2
     token = random.choice(tokens)        # Random token from CSV
 
@@ -169,12 +172,12 @@ def main(input_json_path, api_url, api_key, csv_path, isLAB, testWF, num_request
 
 if __name__ == "__main__":
     testWF = False
-    input_json_path = "JasperAI_Runpod_Final_API.json"  # Update this path if needed
-    csv_path = "Wedgwood AI Word Bank_V1.csv"           # The CSV file containing tokens
+    input_json_path = "JasperAI_Runpod_Final_ColorTest_New_API.json"  # Update this path if needed
+    csv_path = "Wedgwood AI Word Bank_V1_Test.csv"           # The CSV file containing tokens
     api_url = "https://api.runpod.ai/v2/ghpeoonf1l7yqb/runsync" # Update if needed
     api_key = "rpa_5RPRABDS0X5QJYSFTVB34BKGYH3AHKJOUQLQJON613y2n1"  # Replace with your actual API key
     
     isLAB = 1
-    num_requests = 50  # Number of requests to send
+    num_requests = 1  # Number of requests to send
 
     main(input_json_path, api_url, api_key, csv_path, isLAB, testWF, num_requests)

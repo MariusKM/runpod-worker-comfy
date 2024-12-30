@@ -281,7 +281,7 @@ def upload_image(
 
         return sim_upload_location
 
-    bucket = bucket_name if bucket_name else time.strftime("%m-%y")
+    bucket = bucket_name if bucket_name else time.strftime("%d-%m-%y")
     
     # Determine the S3 key based on flags and filename info
     if filename_info:
