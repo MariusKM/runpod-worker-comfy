@@ -104,7 +104,7 @@ def prepare_and_send_request(args):
     return (i, token, colorDetail, colorBody, whatVase, isCreative, 
             response, elapsed, combination_id)
 
-def main(input_json_path, api_url, api_key, csv_path, isLAB, testWF, requests_per_combination, specific_vase=None, specific_creative=None):
+def main(input_json_path, api_url, api_key, csv_path, isLAB, testWF, requests_per_combination, specific_vase=None, specific_creative=None, exclude_vase=None):
     # Load workflow and tokens
     with open(input_json_path, "r") as f:
         original_workflow = json.load(f)
@@ -122,12 +122,17 @@ def main(input_json_path, api_url, api_key, csv_path, isLAB, testWF, requests_pe
         creative_options = [specific_creative]
         creative_mode = f"creative option {specific_creative}"
 
-    if specific_vase is None:
-        vases = [1, 2, 3, 4]
-        vase_mode = "all vases"
-    else:
+    # Handle vase selection and exclusion
+    all_vases = [1, 2, 3, 4]
+    if specific_vase is not None:
         vases = [specific_vase]
         vase_mode = f"vase type {specific_vase}"
+    elif exclude_vase is not None:
+        vases = [v for v in all_vases if v != exclude_vase]
+        vase_mode = f"all vases except type {exclude_vase}"
+    else:
+        vases = all_vases
+        vase_mode = "all vases"
         
     mode = f"{vase_mode}, {creative_mode}"
     
@@ -139,7 +144,7 @@ def main(input_json_path, api_url, api_key, csv_path, isLAB, testWF, requests_pe
     print(f"CSV token list: {csv_path}")
     print(f"isLAB: {isLAB}")
     print(f"Combinations per parameter:")
-    print(f"- Vases: {len(vases)} {'(specific vase)' if specific_vase else '(all vases)'}")
+    print(f"- Vases: {len(vases)} (using vases: {', '.join(map(str, vases))})")
     print(f"- Colors (detail): {len(colors)}")
     print(f"- Colors (body): {len(colors)}")
     print(f"- Creative options: {len(creative_options)} {'(specific option)' if specific_creative else '(all options)'}")
@@ -208,8 +213,8 @@ def main(input_json_path, api_url, api_key, csv_path, isLAB, testWF, requests_pe
 
 if __name__ == "__main__":
     testWF = False
-    #input_json_path = "JasperAI_Runpod_Final_Test_API.json"
-    input_json_path = "JasperAI_Runpod_Final_ColorTest_New_API_V2.json"
+    #input_json_path = "JasperAI_Runpod_Final_NewTransferTest_API.json"  # Replace with your JSON file path
+    input_json_path= "JasperAI_Runpod_Final_ColorTest_NewTransferTest_API_V2.json"
     csv_path = "Wedgwood AI Word Bank_V1_Test.csv"
     api_url = "https://api.runpod.ai/v2/ghpeoonf1l7yqb/runsync"
     api_key = "rpa_5RPRABDS0X5QJYSFTVB34BKGYH3AHKJOUQLQJON613y2n1"
@@ -225,9 +230,16 @@ if __name__ == "__main__":
                        help='Specific vase type to test (1-4). If not provided, tests all vases.')
     parser.add_argument('--creative', type=int, choices=[1, 2],
                        help='Specific creative option to test (1-2). If not provided, tests all options.')
+    parser.add_argument('--exclude-vase', type=int, choices=[1, 2, 3, 4],
+                       help='Specific vase type to exclude from testing (1-4).')
     
     args = parser.parse_args()
     
-    # Run the main function with the specified vase type and creative option (if any)
+    # Validate that --vase and --exclude-vase are not used together
+    if args.vase is not None and args.exclude_vase is not None:
+        parser.error("Cannot use both --vase and --exclude-vase at the same time")
+    
+    # Run the main function with the specified parameters
     main(input_json_path, api_url, api_key, csv_path, isLAB, testWF, 
-         requests_per_combination, specific_vase=args.vase, specific_creative=args.creative)
+         requests_per_combination, specific_vase=args.vase, 
+         specific_creative=args.creative, exclude_vase=args.exclude_vase)

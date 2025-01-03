@@ -104,17 +104,18 @@ if __name__ == "__main__":
         input_json_path = "test_input.json"
     else:
         #input_json_path = "JasperAI_Runpod_Final_Test_API.json"  # Replace with your JSON file path
-        input_json_path = "JasperAI_Runpod_Final_NewTransferTest_API.json"  # Replace with your JSON file path
+        #input_json_path = "JasperAI_Runpod_Final_NewTransferTest_API.json"  # Replace with your JSON file path
         #input_json_path = "JasperAI_Runpod_Final_ColorTest_New_API_V2.json"  # Replace with your JSON file path
+        input_json_path= "JasperAI_Runpod_Final_ColorTest_NewTransferTest_API_V2.json"
     api_url = "https://api.runpod.ai/v2/ghpeoonf1l7yqb/runsync" # Replace with your Runpod API endpoint URL
     api_key = "rpa_5RPRABDS0X5QJYSFTVB34BKGYH3AHKJOUQLQJON613y2n1"  # Replace with your API key
 
     # Parameters to set
-    colorDetail = "5005441"  # Replace with your desired value
-    colorBody = "12227444"   # Replace with your desired value
+    colorDetail = "8761788"  # Replace with your desired value
+    colorBody = "16752128"   # Replace with your desired value
     token = "Fox"           # Replace with your desired value
     whatVase =3
-    isCreative =1
+    isCreative =2
     isLAB =1
 
     # Run the main script

@@ -24,7 +24,6 @@
       "title": "VAE Decode"
     }
   },
- 
   "14": {
     "inputs": {
       "pixels": [
@@ -145,7 +144,6 @@
       "title": "IPAdapter Model Loader"
     }
   },
-
   "67": {
     "inputs": {
       "samples": [
@@ -201,7 +199,7 @@
   "72": {
     "inputs": {
       "filename_prefix": [
-        "671",
+        "677",
         0
       ],
       "images": [
@@ -481,6 +479,23 @@
       "title": "CLIPTextEncodeSDXL"
     }
   },
+  "159": {
+    "inputs": {
+      "string_field_0": [
+        "229",
+        0
+      ],
+      "string_field_1": [
+        "513",
+        0
+      ],
+      "newline": false
+    },
+    "class_type": "Badman_Concat_String",
+    "_meta": {
+      "title": "Concat String (Badman)"
+    }
+  },
   "218": {
     "inputs": {
       "string_field_0": "A (",
@@ -512,13 +527,27 @@
   "225": {
     "inputs": {
       "string_field_0": [
-        "684",
+        "667",
         0
       ],
       "string_field_1": [
         "512",
         0
       ],
+      "newline": false
+    },
+    "class_type": "Badman_Concat_String",
+    "_meta": {
+      "title": "Concat String (Badman)"
+    }
+  },
+  "229": {
+    "inputs": {
+      "string_field_0": [
+        "225",
+        0
+      ],
+      "string_field_1": "_",
       "newline": false
     },
     "class_type": "Badman_Concat_String",
@@ -551,25 +580,6 @@
     "class_type": "ControlNetApplyAdvanced",
     "_meta": {
       "title": "Apply ControlNet"
-    }
-  },
-
-  "319": {
-    "inputs": {
-      "blend_factor": 1,
-      "blend_mode": "multiply",
-      "image1": [
-        "320",
-        0
-      ],
-      "image2": [
-        "389",
-        0
-      ]
-    },
-    "class_type": "Badman_Blend",
-    "_meta": {
-      "title": "ImageBlend(Badman)"
     }
   },
   "320": {
@@ -622,50 +632,9 @@
       "title": "EmptyImage"
     }
   },
-  "333": {
-    "inputs": {
-      "blend_factor": 1,
-      "blend_mode": "multiply",
-      "image1": [
-        "320",
-        0
-      ],
-      "image2": [
-        "394",
-        0
-      ]
-    },
-    "class_type": "Badman_Blend",
-    "_meta": {
-      "title": "ImageBlend(Badman)"
-    }
-  },
-  "335": {
-    "inputs": {
-      "x": 0,
-      "y": 0,
-      "resize_source": true,
-      "destination": [
-        "333",
-        0
-      ],
-      "source": [
-        "319",
-        0
-      ],
-      "mask": [
-        "589",
-        1
-      ]
-    },
-    "class_type": "ImageCompositeMasked",
-    "_meta": {
-      "title": "ImageCompositeMasked"
-    }
-  },
   "349": {
     "inputs": {
-      "strength": 0.45,
+      "strength": 0.5,
       "start_percent": 0,
       "end_percent": 0.5,
       "positive": [
@@ -729,36 +698,6 @@
       "title": "InvertMask"
     }
   },
-  "389": {
-    "inputs": {
-      "width": 2048,
-      "height": 2048,
-      "batch_size": 1,
-      "color": [
-        "503",
-        0
-      ]
-    },
-    "class_type": "EmptyImage",
-    "_meta": {
-      "title": "EmptyImage"
-    }
-  },
-  "394": {
-    "inputs": {
-      "width": 2048,
-      "height": 2048,
-      "batch_size": 1,
-      "color": [
-        "504",
-        0
-      ]
-    },
-    "class_type": "EmptyImage",
-    "_meta": {
-      "title": "EmptyImage"
-    }
-  },
   "396": {
     "inputs": {
       "value": ""
@@ -774,12 +713,43 @@
         "396",
         0
       ],
-      "string_field_1": "BorgheseNew_",
+      "string_field_1": "BorgheseClassicNew_",
       "newline": false
     },
     "class_type": "Badman_Concat_String",
     "_meta": {
       "title": "OutputFilePath"
+    }
+  },
+  "398": {
+    "inputs": {
+      "string_field_0": [
+        "667",
+        0
+      ],
+      "string_field_1": [
+        "512",
+        0
+      ],
+      "newline": false
+    },
+    "class_type": "Badman_Concat_String",
+    "_meta": {
+      "title": "Concat String (Badman)"
+    }
+  },
+  "400": {
+    "inputs": {
+      "string_field_0": [
+        "398",
+        0
+      ],
+      "string_field_1": "_Pallette",
+      "newline": false
+    },
+    "class_type": "Badman_Concat_String",
+    "_meta": {
+      "title": "Concat String (Badman)"
     }
   },
   "414": {
@@ -839,14 +809,14 @@
         0
       ],
       "method": "histogram",
-      "preserve_details": 0.6,
+      "preserve_details": 0.5,
       "mask_threshold": 0.05,
       "input_image": [
         "320",
         0
       ],
       "mask": [
-        "686",
+        "713",
         0
       ]
     },
@@ -862,7 +832,7 @@
         0
       ],
       "method": "histogram",
-      "preserve_details": 0.6,
+      "preserve_details": 0.5,
       "mask_threshold": 0.05,
       "input_image": [
         "320",
@@ -981,18 +951,6 @@
       "title": "ImageCompositeMasked"
     }
   },
-  "498": {
-    "inputs": {
-      "value": [
-        "219",
-        0
-      ]
-    },
-    "class_type": "Badman_Print",
-    "_meta": {
-      "title": "Print (Badman)"
-    }
-  },
   "500": {
     "inputs": {
       "radius": 0,
@@ -1082,19 +1040,6 @@
       "title": "Image Blur"
     }
   },
-  "507": {
-    "inputs": {
-      "brightness": 1.5,
-      "image": [
-        "335",
-        0
-      ]
-    },
-    "class_type": "BadmanBrightness",
-    "_meta": {
-      "title": "Image Brightness Adjust (Badman)"
-    }
-  },
   "512": {
     "inputs": {
       "value": "Rabbit"
@@ -1106,7 +1051,7 @@
   },
   "513": {
     "inputs": {
-      "value": "3350979"
+      "value": "12227444"
     },
     "class_type": "Badman_String",
     "_meta": {
@@ -1115,7 +1060,7 @@
   },
   "514": {
     "inputs": {
-      "value": "3350979"
+      "value": "5005441"
     },
     "class_type": "Badman_String",
     "_meta": {
@@ -1124,7 +1069,7 @@
   },
   "515": {
     "inputs": {
-      "value": 3537
+      "value": 6069
     },
     "class_type": "INTConstant",
     "_meta": {
@@ -1272,7 +1217,7 @@
   },
   "552": {
     "inputs": {
-      "value": 2
+      "value": 3
     },
     "class_type": "INTConstant",
     "_meta": {
@@ -1558,7 +1503,7 @@
         "396",
         0
       ],
-      "string_field_1": "PhoenixNew_",
+      "string_field_1": "PhoenixClassicNew_",
       "newline": false
     },
     "class_type": "Badman_Concat_String",
@@ -1574,11 +1519,11 @@
       ],
       "sel_mode": false,
       "input1": [
-        "136",
+        "692",
         0
       ],
       "input2": [
-        "524",
+        "712",
         0
       ]
     },
@@ -1595,11 +1540,11 @@
       ],
       "sel_mode": false,
       "input1": [
-        "142",
+        "691",
         0
       ],
       "input2": [
-        "527",
+        "706",
         0
       ]
     },
@@ -1627,10 +1572,6 @@
       "input1": [
         "502",
         0
-      ],
-      "input2": [
-        "507",
-        0
       ]
     },
     "class_type": "ImpactSwitch",
@@ -1649,7 +1590,7 @@
   },
   "626": {
     "inputs": {
-      "image": "Panther_Desat_Alpha.png",
+      "image": "PantherCollage_Desat_Alpha_2.png",
       "upload": "image"
     },
     "class_type": "LoadImage",
@@ -1669,7 +1610,7 @@
   },
   "628": {
     "inputs": {
-      "image": "Panther_Desat_Mask.png",
+      "image": "PantherCollage_Desat_Mask_2.png",
       "upload": "image"
     },
     "class_type": "LoadImage",
@@ -1689,7 +1630,7 @@
   },
   "630": {
     "inputs": {
-      "image": "Pather_Canny_Edit.png",
+      "image": "PantherCollage_CannyEdit_2.png",
       "upload": "image"
     },
     "class_type": "LoadImage",
@@ -1699,7 +1640,7 @@
   },
   "631": {
     "inputs": {
-      "image": "Panther_Desat.png",
+      "image": "PantherCollage_Desat_2.png",
       "upload": "image"
     },
     "class_type": "LoadImage",
@@ -1713,7 +1654,7 @@
         "396",
         0
       ],
-      "string_field_1": "PantherNew_",
+      "string_field_1": "PantherClassicNew_",
       "newline": false
     },
     "class_type": "Badman_Concat_String",
@@ -1787,6 +1728,62 @@
         "396",
         0
       ],
+      "string_field_1": "PortlandClassicNew_",
+      "newline": false
+    },
+    "class_type": "Badman_Concat_String",
+    "_meta": {
+      "title": "OutputFilePath"
+    }
+  },
+  "657": {
+    "inputs": {
+      "string_field_0": [
+        "396",
+        0
+      ],
+      "string_field_1": "BorgheseNew_",
+      "newline": false
+    },
+    "class_type": "Badman_Concat_String",
+    "_meta": {
+      "title": "OutputFilePath"
+    }
+  },
+  "658": {
+    "inputs": {
+      "string_field_0": [
+        "396",
+        0
+      ],
+      "string_field_1": "PhoenixNew_",
+      "newline": false
+    },
+    "class_type": "Badman_Concat_String",
+    "_meta": {
+      "title": "OutputFilePath"
+    }
+  },
+  "659": {
+    "inputs": {
+      "string_field_0": [
+        "396",
+        0
+      ],
+      "string_field_1": "PantherNew_",
+      "newline": false
+    },
+    "class_type": "Badman_Concat_String",
+    "_meta": {
+      "title": "OutputFilePath"
+    }
+  },
+  "660": {
+    "inputs": {
+      "string_field_0": [
+        "396",
+        0
+      ],
       "string_field_1": "PortlandNew_",
       "newline": false
     },
@@ -1795,41 +1792,81 @@
       "title": "OutputFilePath"
     }
   },
-  "661": {
-    "inputs": {
-      "string_field_0": [
-        "225",
-        0
-      ],
-      "string_field_1": "_",
-      "newline": false
-    },
-    "class_type": "Badman_Concat_String",
-    "_meta": {
-      "title": "Concat String (Badman)"
-    }
-  },
-  "662": {
-    "inputs": {
-      "string_field_0": [
-        "661",
-        0
-      ],
-      "string_field_1": [
-        "513",
-        0
-      ],
-      "newline": false
-    },
-    "class_type": "Badman_Concat_String",
-    "_meta": {
-      "title": "Concat String (Badman)"
-    }
-  },
   "664": {
     "inputs": {
+      "select": [
+        "618",
+        0
+      ],
+      "sel_mode": false,
+      "input1": [
+        "657",
+        0
+      ],
+      "input2": [
+        "397",
+        0
+      ]
+    },
+    "class_type": "ImpactSwitch",
+    "_meta": {
+      "title": "Switch (Any)"
+    }
+  },
+  "665": {
+    "inputs": {
+      "select": [
+        "618",
+        0
+      ],
+      "sel_mode": false,
+      "input1": [
+        "658",
+        0
+      ],
+      "input2": [
+        "615",
+        0
+      ]
+    },
+    "class_type": "ImpactSwitch",
+    "_meta": {
+      "title": "Switch (Any)"
+    }
+  },
+  "667": {
+    "inputs": {
+      "select": [
+        "552",
+        0
+      ],
+      "sel_mode": false,
+      "input1": [
+        "664",
+        0
+      ],
+      "input2": [
+        "665",
+        0
+      ],
+      "input3": [
+        "707",
+        0
+      ],
+      "input4": [
+        "708",
+        0
+      ]
+    },
+    "class_type": "ImpactSwitch",
+    "_meta": {
+      "title": "Switch (Any)"
+    }
+  },
+  "674": {
+    "inputs": {
       "string_field_0": [
-        "662",
+        "159",
         0
       ],
       "string_field_1": "_",
@@ -1840,10 +1877,10 @@
       "title": "Concat String (Badman)"
     }
   },
-  "668": {
+  "675": {
     "inputs": {
       "string_field_0": [
-        "664",
+        "674",
         0
       ],
       "string_field_1": [
@@ -1857,10 +1894,10 @@
       "title": "Concat String (Badman)"
     }
   },
-  "669": {
+  "676": {
     "inputs": {
       "string_field_0": [
-        "668",
+        "675",
         0
       ],
       "string_field_1": "_",
@@ -1871,23 +1908,14 @@
       "title": "Concat String (Badman)"
     }
   },
-  "670": {
-    "inputs": {
-      "value": ""
-    },
-    "class_type": "Badman_String",
-    "_meta": {
-      "title": "GlobalSeedString"
-    }
-  },
-  "671": {
+  "677": {
     "inputs": {
       "string_field_0": [
-        "669",
+        "676",
         0
       ],
       "string_field_1": [
-        "670",
+        "680",
         0
       ],
       "newline": false
@@ -1897,147 +1925,156 @@
       "title": "Concat String (Badman)"
     }
   },
-  "672": {
+  "680": {
     "inputs": {
-      "select": [
-        "618",
+      "value": ""
+    },
+    "class_type": "Badman_String",
+    "_meta": {
+      "title": "GlobalSeedString"
+    }
+  },
+  "681": {
+    "inputs": {
+      "image": "PantherCollage_Mask_Handles.png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Desat Base Vase"
+    }
+  },
+  "682": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "crop_w": 12,
+      "crop_h": 0,
+      "target_width": 1024,
+      "target_height": 1024,
+      "text_g": "(intricate panther handles :1.5) as a  bas relief,  BAS-RELIEF page",
+      "text_l": "(masterpiece:1.4),(best quality:1.4) ,(rough surface:1.25), rough texture, (plaster:1.5), (intricate details:1.3), (official product photo:1.2), perfect lighting, exhibited at the british museum, photo courtesy museum of art, pottery, clay , ",
+      "clip": [
+        "44",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncodeSDXL",
+    "_meta": {
+      "title": "CLIPTextEncodeSDXL"
+    }
+  },
+  "683": {
+    "inputs": {
+      "strength": 1,
+      "set_cond_area": "default",
+      "conditioning": [
+        "682",
         0
       ],
-      "sel_mode": false,
-      "input1": [
-        "397",
-        0
-      ],
-      "input2": [
-        "673",
+      "mask": [
+        "690",
         0
       ]
     },
-    "class_type": "ImpactSwitch",
+    "class_type": "ConditioningSetMask",
     "_meta": {
-      "title": "Switch (Any)"
-    }
-  },
-  "673": {
-    "inputs": {
-      "string_field_0": [
-        "396",
-        0
-      ],
-      "string_field_1": "BorgheseClassicNew_",
-      "newline": false
-    },
-    "class_type": "Badman_Concat_String",
-    "_meta": {
-      "title": "OutputFilePath"
-    }
-  },
-  "674": {
-    "inputs": {
-      "string_field_0": [
-        "396",
-        0
-      ],
-      "string_field_1": "PhoenixClassicNew_",
-      "newline": false
-    },
-    "class_type": "Badman_Concat_String",
-    "_meta": {
-      "title": "OutputFilePath"
-    }
-  },
-  "675": {
-    "inputs": {
-      "string_field_0": [
-        "396",
-        0
-      ],
-      "string_field_1": "PantherClassicNew_",
-      "newline": false
-    },
-    "class_type": "Badman_Concat_String",
-    "_meta": {
-      "title": "OutputFilePath"
-    }
-  },
-  "676": {
-    "inputs": {
-      "string_field_0": [
-        "396",
-        0
-      ],
-      "string_field_1": "PortlandClassicNew_",
-      "newline": false
-    },
-    "class_type": "Badman_Concat_String",
-    "_meta": {
-      "title": "OutputFilePath"
-    }
-  },
-  "677": {
-    "inputs": {
-      "select": [
-        "618",
-        0
-      ],
-      "sel_mode": false,
-      "input1": [
-        "615",
-        0
-      ],
-      "input2": [
-        "674",
-        0
-      ]
-    },
-    "class_type": "ImpactSwitch",
-    "_meta": {
-      "title": "Switch (Any)"
-    }
-  },
-  "678": {
-    "inputs": {
-      "select": [
-        "618",
-        0
-      ],
-      "sel_mode": false,
-      "input1": [
-        "639",
-        0
-      ],
-      "input2": [
-        "675",
-        0
-      ]
-    },
-    "class_type": "ImpactSwitch",
-    "_meta": {
-      "title": "Switch (Any)"
-    }
-  },
-  "679": {
-    "inputs": {
-      "select": [
-        "618",
-        0
-      ],
-      "sel_mode": false,
-      "input1": [
-        "652",
-        0
-      ],
-      "input2": [
-        "676",
-        0
-      ]
-    },
-    "class_type": "ImpactSwitch",
-    "_meta": {
-      "title": "Switch (Any)"
+      "title": "Conditioning (Set Mask)"
     }
   },
   "684": {
+    "inputs": {
+      "conditioning1": [
+        "135",
+        0
+      ],
+      "conditioning2": [
+        "137",
+        0
+      ],
+      "conditioning3": [
+        "683",
+        0
+      ]
+    },
+    "class_type": "ImpactCombineConditionings",
+    "_meta": {
+      "title": "Combine Conditionings"
+    }
+  },
+  "685": {
+    "inputs": {
+      "conditioning1": [
+        "141",
+        0
+      ],
+      "conditioning2": [
+        "143",
+        0
+      ],
+      "conditioning3": [
+        "687",
+        0
+      ]
+    },
+    "class_type": "ImpactCombineConditionings",
+    "_meta": {
+      "title": "Combine Conditionings"
+    }
+  },
+  "686": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "crop_w": 0,
+      "crop_h": 0,
+      "target_width": 1024,
+      "target_height": 1024,
+      "text_g": "bird, feathers,oversaturated, high contrast,(metallic:1.15), (glossy:1.2), (reflective:1.25), (shiny:1.25), worst quality, low quality, illustration, 3d, 2d, painting, cartoons,anime, sketch,  (text:1.4), (font:1.6), logo, wood, (black:1.35), ",
+      "text_l": "bird, feathers,oversaturated, high contrast,(metallic:1.15), (glossy:1.2), (reflective:1.25), (shiny:1.25), worst quality, low quality, illustration, 3d, 2d, painting, cartoons,anime, sketch,  (text:1.4), (font:1.6), logo, wood, (black:1.35), ",
+      "clip": [
+        "44",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncodeSDXL",
+    "_meta": {
+      "title": "CLIPTextEncodeSDXL"
+    }
+  },
+  "687": {
+    "inputs": {
+      "strength": 1,
+      "set_cond_area": "default",
+      "conditioning": [
+        "686",
+        0
+      ],
+      "mask": [
+        "690",
+        0
+      ]
+    },
+    "class_type": "ConditioningSetMask",
+    "_meta": {
+      "title": "Conditioning (Set Mask)"
+    }
+  },
+  "690": {
+    "inputs": {
+      "amount": 6,
+      "device": "gpu",
+      "mask": [
+        "681",
+        1
+      ]
+    },
+    "class_type": "BadmanMaskBlur",
+    "_meta": {
+      "title": "Mask Blur (Badman)"
+    }
+  },
+  "691": {
     "inputs": {
       "select": [
         "552",
@@ -2045,19 +2082,19 @@
       ],
       "sel_mode": false,
       "input1": [
-        "672",
+        "142",
         0
       ],
       "input2": [
-        "677",
+        "142",
         0
       ],
       "input3": [
-        "678",
+        "685",
         0
       ],
       "input4": [
-        "679",
+        "142",
         0
       ]
     },
@@ -2066,7 +2103,292 @@
       "title": "Switch (Any)"
     }
   },
-  "686": {
+  "692": {
+    "inputs": {
+      "select": [
+        "552",
+        0
+      ],
+      "sel_mode": false,
+      "input1": [
+        "136",
+        0
+      ],
+      "input2": [
+        "136",
+        0
+      ],
+      "input3": [
+        "684",
+        0
+      ],
+      "input4": [
+        "136",
+        0
+      ]
+    },
+    "class_type": "ImpactSwitch",
+    "_meta": {
+      "title": "Switch (Any)"
+    }
+  },
+  "694": {
+    "inputs": {
+      "conditioning_1": [
+        "709",
+        0
+      ],
+      "conditioning_2": [
+        "699",
+        0
+      ]
+    },
+    "class_type": "ConditioningCombine",
+    "_meta": {
+      "title": "Conditioning (Combine)"
+    }
+  },
+  "698": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "crop_w": 12,
+      "crop_h": 0,
+      "target_width": 1024,
+      "target_height": 1024,
+      "text_g": "(intricate panther handles :1.5) as a  bas relief,  BAS-RELIEF page",
+      "text_l": "(masterpiece:1.4),(best quality:1.4) ,(rough surface:1.25), rough texture, (plaster:1.5), (intricate details:1.3), (official product photo:1.2), perfect lighting, exhibited at the british museum, photo courtesy museum of art, pottery, clay , ",
+      "clip": [
+        "44",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncodeSDXL",
+    "_meta": {
+      "title": "CLIPTextEncodeSDXL"
+    }
+  },
+  "699": {
+    "inputs": {
+      "strength": 1,
+      "set_cond_area": "default",
+      "conditioning": [
+        "698",
+        0
+      ],
+      "mask": [
+        "690",
+        0
+      ]
+    },
+    "class_type": "ConditioningSetMask",
+    "_meta": {
+      "title": "Conditioning (Set Mask)"
+    }
+  },
+  "700": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "crop_w": 0,
+      "crop_h": 0,
+      "target_width": 1024,
+      "target_height": 1024,
+      "text_g": "bird, feathers,oversaturated, high contrast,(metallic:1.15), (glossy:1.2), (reflective:1.25), (shiny:1.25), worst quality, low quality, illustration, 3d, 2d, painting, cartoons,anime, sketch,  (text:1.4), (font:1.6), logo, wood, (black:1.35), ",
+      "text_l": "bird, feathers,oversaturated, high contrast,(metallic:1.15), (glossy:1.2), (reflective:1.25), (shiny:1.25), worst quality, low quality, illustration, 3d, 2d, painting, cartoons,anime, sketch,  (text:1.4), (font:1.6), logo, wood, (black:1.35), ",
+      "clip": [
+        "44",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncodeSDXL",
+    "_meta": {
+      "title": "CLIPTextEncodeSDXL"
+    }
+  },
+  "701": {
+    "inputs": {
+      "strength": 1,
+      "set_cond_area": "default",
+      "conditioning": [
+        "700",
+        0
+      ],
+      "mask": [
+        "690",
+        0
+      ]
+    },
+    "class_type": "ConditioningSetMask",
+    "_meta": {
+      "title": "Conditioning (Set Mask)"
+    }
+  },
+  "702": {
+    "inputs": {
+      "conditioning_1": [
+        "710",
+        0
+      ],
+      "conditioning_2": [
+        "701",
+        0
+      ]
+    },
+    "class_type": "ConditioningCombine",
+    "_meta": {
+      "title": "Conditioning (Combine)"
+    }
+  },
+  "706": {
+    "inputs": {
+      "select": [
+        "552",
+        0
+      ],
+      "sel_mode": false,
+      "input1": [
+        "527",
+        0
+      ],
+      "input2": [
+        "527",
+        0
+      ],
+      "input3": [
+        "702",
+        0
+      ],
+      "input4": [
+        "527",
+        0
+      ]
+    },
+    "class_type": "ImpactSwitch",
+    "_meta": {
+      "title": "Switch (Any)"
+    }
+  },
+  "707": {
+    "inputs": {
+      "select": [
+        "618",
+        0
+      ],
+      "sel_mode": false,
+      "input1": [
+        "659",
+        0
+      ],
+      "input2": [
+        "639",
+        0
+      ]
+    },
+    "class_type": "ImpactSwitch",
+    "_meta": {
+      "title": "Switch (Any)"
+    }
+  },
+  "708": {
+    "inputs": {
+      "select": [
+        "618",
+        0
+      ],
+      "sel_mode": false,
+      "input1": [
+        "660",
+        0
+      ],
+      "input2": [
+        "652",
+        0
+      ]
+    },
+    "class_type": "ImpactSwitch",
+    "_meta": {
+      "title": "Switch (Any)"
+    }
+  },
+  "709": {
+    "inputs": {
+      "strength": 1,
+      "set_cond_area": "default",
+      "conditioning": [
+        "524",
+        0
+      ],
+      "mask": [
+        "711",
+        0
+      ]
+    },
+    "class_type": "ConditioningSetMask",
+    "_meta": {
+      "title": "Conditioning (Set Mask)"
+    }
+  },
+  "710": {
+    "inputs": {
+      "strength": 1,
+      "set_cond_area": "default",
+      "conditioning": [
+        "527",
+        0
+      ],
+      "mask": [
+        "711",
+        0
+      ]
+    },
+    "class_type": "ConditioningSetMask",
+    "_meta": {
+      "title": "Conditioning (Set Mask)"
+    }
+  },
+  "711": {
+    "inputs": {
+      "mask": [
+        "690",
+        0
+      ]
+    },
+    "class_type": "InvertMask",
+    "_meta": {
+      "title": "InvertMask"
+    }
+  },
+  "712": {
+    "inputs": {
+      "select": [
+        "552",
+        0
+      ],
+      "sel_mode": false,
+      "input1": [
+        "524",
+        0
+      ],
+      "input2": [
+        "524",
+        0
+      ],
+      "input3": [
+        "694",
+        0
+      ],
+      "input4": [
+        "524",
+        0
+      ]
+    },
+    "class_type": "ImpactSwitch",
+    "_meta": {
+      "title": "Switch (Any)"
+    }
+  },
+  "713": {
     "inputs": {
       "x": 0,
       "y": 0,
