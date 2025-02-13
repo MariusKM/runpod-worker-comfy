@@ -12,11 +12,13 @@ from itertools import product
 colors = [
     '3350979',    # INDIGO
     '11212013',   # ELECTRIC_PURPLE
-    '65378',      # LIME_GREEN
+    #'65378',      # LIME_GREEN
+    '8584960',      # LIME_GREEN
     '55512',      # TURQUOISE
     '16752128',   # AMBER
     '16765440',   # GOLDEN_YELLOW
-    '2916897',    # FOREST_GREEN
+    #'2916897',    # FOREST_GREEN
+    '1729536',    # FOREST_GREEN
     '16600577',   # VERMILION
     '5005441',    # SLATE_BLUE
     '8495811',    # STEEL_BLUE
@@ -24,7 +26,8 @@ colors = [
     '15526887',   # OFF_WHITE
     '7495776',    # DUSTY_ROSE
     '7827809',    # WARM_GRAY
-    '14199131',   # GOLDEN_TAN
+    #'14199131',   # GOLDEN_TAN
+    '13677670',   # GOLDEN_TAN
     '15721872',   # PALE_YELLOW
     '5987425',    # GUNMETAL_GRAY
     '12498350',   # LIGHT_TAUPE
@@ -214,9 +217,16 @@ def main(input_json_path, api_url, api_key, csv_path, isLAB, testWF, requests_pe
 if __name__ == "__main__":
     testWF = False
     #input_json_path = "JasperAI_Runpod_Final_NewTransferTest_API.json"  # Replace with your JSON file path
-    input_json_path= "JasperAI_Runpod_Final_ColorTest_NewTransferTest_API_V2.json"
-    csv_path = "Wedgwood AI Word Bank_V1_Test.csv"
-    api_url = "https://api.runpod.ai/v2/ghpeoonf1l7yqb/runsync"
+    #input_json_path= "JasperAI_Runpod_Final_ColorTest_NewTransferTest_API_V2.json"
+    #input_json_path= "JasperAI_Runpod_Final_NewTransferTest_MaskedIPA_API.json"
+    #input_json_path=  "JasperAI_Runpod_Final_NewTransferTest_MaskedIPA_API_histogram.json"
+    #input_json_path=  "JasperAI_Runpod_Final_V3_SFW.json"
+    input_json_path=  "JasperAI_Runpod_Final_V3_SFW_BorgheseTest.json"
+    #input_json_path=  "JasperAI_Runpod_Final_V3_Panther_API.json"
+    csv_path = "Wedgwood AI Word Bank_V2.csv"
+    #api_url = "https://api.runpod.ai/v2/ghpeoonf1l7yqb/runsync"
+    api_url = "https://api.runpod.ai/v2/xcnz6lu0iritsg/runsync"
+    #api_key = "rpa_5RPRABDS0X5QJYSFTVB34BKGYH3AHKJOUQLQJON613y2n1"#
     api_key = "rpa_5RPRABDS0X5QJYSFTVB34BKGYH3AHKJOUQLQJON613y2n1"
     
     isLAB = 1

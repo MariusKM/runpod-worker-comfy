@@ -284,16 +284,14 @@ def upload_image(
     bucket = bucket_name if bucket_name else time.strftime("%d-%m-%y")
     
     # Determine the S3 key based on flags and filename info
-    if filename_info:
-        test_token = os.environ.get("TEST_TOKEN", "false").lower() == "true"
-        test_color = os.environ.get("TEST_COLOR", "false").lower() == "true"
-        
-        if test_token:
-            s3_key = f"{filename_info['vase_type']}/{filename_info['token']}/{filename_info['complete_filename']}"
-        elif test_color:
-            s3_key = f"{filename_info['vase_type']}/{filename_info['color1']}/{filename_info['color2']}/{filename_info['complete_filename']}"
-        else:
-            s3_key = filename_info['complete_filename']
+ 
+    test_token = os.environ.get("TEST_TOKEN", "false").lower() == "true"
+    test_color = os.environ.get("TEST_COLOR", "false").lower() == "true"
+    
+    if test_token:
+        s3_key = f"{filename_info['vase_type']}/{filename_info['token']}/{filename_info['complete_filename']}"
+    elif test_color:
+        s3_key = f"{filename_info['vase_type']}/{filename_info['color1']}/{filename_info['color2']}/{filename_info['complete_filename']}"
     else:
         # Fallback to original behavior if filename parsing fails
         s3_key = job_id.replace('sync-', '')

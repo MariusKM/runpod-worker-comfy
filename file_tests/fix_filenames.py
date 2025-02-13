@@ -6,7 +6,7 @@ s3 = boto3.client('s3')
 
 # Bucket and prefix configuration
 bucket_name = 'jasper-250-runpod-staging-external-service-bucket'
-prefix = '12-24/PortlandClassicNew/'
+prefix = '09-01-25/'
 
 def clean_key(key):
     # Keep the directory structure but clean the filename
